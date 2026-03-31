@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エンジ×レンジ × AFTER FIVE YEAR — 早稲田現役生のための2大ツール</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --enji: #8C1A1A;
+    --enji-bright: #C0392B;
+    --enji-light: #E8574A;
+    --enji-dark: #5C0A0A;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --ivory: #F5F0E8;
+    --charcoal: #1A1A1A;
+    --mid: #3A3A3A;
+    --aft: #0A1628;
+    --aft-accent: #1E3A6E;
+    --aft-bright: #4A90D9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--charcoal);
+    color: var(--ivory);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(140,26,26,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 70%, rgba(10,22,40,0.6) 0%, transparent 70%);
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(140,26,26,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140,26,26,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 0.4em 1.2em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    animation: fadeInUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    animation: fadeInUp 0.8s 0.15s ease both;
+  }
+
+  .hero-title .enji-word {
+    color: var(--enji-light);
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero-title .enji-word::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--enji-bright), var(--gold));
+  }
+
+  .hero-x {
+    color: var(--gold);
+    margin: 0 0.15em;
+  }
+
+  .hero-sub {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: rgba(245,240,232,0.6);
+    margin-top: 1rem;
+    letter-spacing: 0.1em;
+    animation: fadeInUp 0.8s 0.3s ease both;
+  }
+
+  .hero-desc {
+    margin-top: 2rem;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    line-height: 1.9;
+    color: rgba(245,240,232,0.75);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s 0.45s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    animation: fadeInUp 0.8s 0.6s ease both;
+  }
+
+  .nav-links-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+  }
+
+  /* ── HERO BUTTONS ── */
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+    width: 240px;
+    padding: 1.05em 1.5em;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--enji-dark), var(--enji-bright));
+    color: var(--ivory);
+    border: 1px solid rgba(192,57,43,0.6);
+    box-shadow: 0 4px 24px rgba(140,26,26,0.45);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(140,26,26,0.6);
+  }
+
+  .btn-secondary {
+    background: rgba(10,22,40,0.6);
+    color: var(--ivory);
+    border: 1px solid rgba(74,144,217,0.45);
+    box-shadow: 0 4px 24px rgba(10,22,40,0.5);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-3px);
+    background: rgba(30,58,110,0.6);
+    border-color: var(--aft-bright);
+    box-shadow: 0 10px 36px rgba(74,144,217,0.25);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(245,240,232,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    font-family: 'Space Grotesk', sans-serif;
+    animation: fadeIn 1.5s 1s ease both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(245,240,232,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    margin: 0 2rem;
+  }
+
+  /* ─── TOOLS SECTION ─── */
+  .tools-section {
+    padding: 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .section-label.visible { opacity: 1; transform: translateY(0); }
+
+  .section-heading {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.1s ease, transform 0.6s 0.1s ease;
+  }
+
+  .section-heading.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── TOOL CARDS ─── */
+  .tool-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 5rem;
+  }
+
+  @media (max-width: 768px) {
+    .tool-cards { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr !important; }
+    .stats-row { flex-direction: column; }
+  }
+
+  .tool-card {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .tool-card.visible { opacity: 1; transform: translateY(0); }
+  .tool-card:nth-child(2) { transition-delay: 0.15s; }
+
+  .tool-card-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(245,240,232,0.1);
+    transition: border-color 0.3s;
+  }
+
+  .tool-card:hover .tool-card-inner { border-color: rgba(245,240,232,0.2); }
+
+  /* ENJI CARD */
+  .card-enji .tool-card-inner {
+    background: linear-gradient(135deg, rgba(140,26,26,0.25) 0%, rgba(26,26,26,0.95) 60%);
+  }
+
+  .card-enji:hover .tool-card-inner {
+    border-color: rgba(192,57,43,0.5);
+    box-shadow: 0 0 40px rgba(140,26,26,0.2);
+  }
+
+  /* AFT CARD */
+  .card-aft .tool-card-inner {
+    background: linear-gradient(135deg, rgba(10,22,40,0.8) 0%, rgba(26,26,26,0.95) 60%);
+  }
+
+  .card-aft:hover .tool-card-inner {
+    border-color: rgba(74,144,217,0.5);
+    box-shadow: 0 0 40px rgba(30,58,110,0.3);
+  }
+
+  .tool-card-header {
+    padding: 2.5rem 2.5rem 0;
+    position: relative;
+  }
+
+  .tool-tag {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.3em 0.8em;
+    margin-bottom: 1.5rem;
+    border: 1px solid;
+  }
+
+  .card-enji .tool-tag {
+    color: var(--enji-light);
+    border-color: rgba(192,57,43,0.5);
+    background: rgba(140,26,26,0.2);
+  }
+
+  .card-aft .tool-tag {
+    color: var(--aft-bright);
+    border-color: rgba(74,144,217,0.4);
+    background: rgba(10,22,40,0.5);
+  }
+
+  .tool-card-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .card-enji .tool-card-title { color: var(--ivory); }
+  .card-aft .tool-card-title { color: var(--ivory); }
+
+  .tool-card-title em {
+    font-style: normal;
+  }
+
+  .card-enji .tool-card-title em { color: var(--enji-light); }
+  .card-aft .tool-card-title em { color: var(--aft-bright); }
+
+  .tool-card-subtitle {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .tool-visual {
+    padding: 2rem 2.5rem;
+    flex: 1;
+  }
+
+  .tool-desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.75);
+    margin-bottom: 2rem;
+  }
+
+  .tool-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tool-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+  }
+
+  .tool-features li::before {
+    content: '—';
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  .card-enji .tool-features li::before { color: var(--enji-light); }
+  .card-aft .tool-features li::before { color: var(--aft-bright); }
+
+  .tool-card-footer {
+    padding: 0 2.5rem 2.5rem;
+  }
+
+  .tool-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8em;
+    padding: 0.85em 1.8em;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .card-enji .tool-link {
+    background: linear-gradient(135deg, var(--enji-dark), var(--enji));
+    color: var(--ivory);
+    border: 1px solid rgba(192,57,43,0.5);
+    box-shadow: 0 4px 20px rgba(140,26,26,0.3);
+  }
+
+  .card-enji .tool-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(140,26,26,0.5);
+  }
+
+  .card-aft .tool-link {
+    background: linear-gradient(135deg, var(--aft), var(--aft-accent));
+    color: var(--ivory);
+    border: 1px solid rgba(74,144,217,0.3);
+    box-shadow: 0 4px 20px rgba(10,22,40,0.5);
+  }
+
+  .card-aft .tool-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(74,144,217,0.3);
+  }
+
+  .link-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .tool-link:hover .link-arrow { transform: translateX(4px); }
+
+  /* DECORATIVE NUMBER */
+  .deco-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.04;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ─── FLOW SECTION ─── */
+  .flow-section {
+    padding: 6rem 2rem 8rem;
+    background: linear-gradient(180deg, transparent, rgba(10,22,40,0.3), transparent);
+    position: relative;
+  }
+
+  .flow-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .flow-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-heading-wrap {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    bottom: 2rem;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--enji-bright), var(--aft-bright));
+  }
+
+  @media (max-width: 600px) {
+    .flow-steps::before { left: 1.5rem; }
+  }
+
+  .flow-step {
+    display: flex;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+  }
+
+  .flow-step.visible { opacity: 1; transform: translateX(0); }
+  .flow-step:nth-child(2) { transition-delay: 0.15s; }
+  .flow-step:nth-child(3) { transition-delay: 0.3s; }
+
+  .flow-step-num {
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: 1px solid;
+    background: var(--charcoal);
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-step:nth-child(1) .flow-step-num {
+    color: var(--enji-light);
+    border-color: var(--enji);
+  }
+
+  .flow-step:nth-child(2) .flow-step-num {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  .flow-step:nth-child(3) .flow-step-num {
+    color: var(--aft-bright);
+    border-color: var(--aft-accent);
+  }
+
+  .flow-step-body {
+    padding-top: 0.8rem;
+    flex: 1;
+  }
+
+  .flow-step-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .flow-step-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.65);
+  }
+
+  .flow-step-tool {
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 0.3em 0.9em;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+
+  .flow-step:nth-child(1) .flow-step-tool {
+    color: var(--enji-light);
+    border-color: rgba(192,57,43,0.3);
+    background: rgba(140,26,26,0.1);
+  }
+
+  .flow-step:nth-child(3) .flow-step-tool {
+    color: var(--aft-bright);
+    border-color: rgba(74,144,217,0.3);
+    background: rgba(10,22,40,0.4);
+  }
+
+  /* ─── STATS ─── */
+  .stats-section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .stat-item.visible { opacity: 1; transform: translateY(0); }
+  .stat-item:nth-child(2) { transition-delay: 0.1s; }
+  .stat-item:nth-child(3) { transition-delay: 0.2s; }
+
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--enji-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 8rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(140,26,26,0.2) 0%, transparent 70%);
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-quote {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    line-height: 1.6;
+    color: rgba(245,240,232,0.9);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-sub {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(245,240,232,0.08);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: rgba(245,240,232,0.3);
+    font-size: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  footer a {
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s, border-bottom 0.3s;
+  }
+
+  nav.scrolled {
+    background: rgba(26,26,26,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ivory);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--enji-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ivory); }
+
+  .nav-cta {
+    padding: 0.5em 1.2em;
+    background: var(--enji);
+    color: var(--ivory) !important;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--enji-bright) !important; color: var(--ivory) !important; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    nav { padding: 1rem 1.5rem; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.1); }
+  }
+
+  /* CARD ACCENT LINES */
+  .tool-card-inner::before {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 100%;
+  }
+
+  .card-enji .tool-card-inner::before {
+    background: linear-gradient(90deg, var(--enji-dark), var(--enji-bright), var(--gold));
+  }
+
+  .card-aft .tool-card-inner::before {
+    background: linear-gradient(90deg, var(--aft), var(--aft-accent), var(--aft-bright));
+  }
+
+  /* TAGLINE SEPARATOR */
+  .tagline-sep {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.08em;
+    position: relative;
+  }
+
+  .tagline-sep::before,
+  .tagline-sep::after {
+    content: '';
+    display: inline-block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,240,232,0.2));
+    vertical-align: middle;
+    margin: 0 1.5rem;
+  }
+
+  .tagline-sep::after { background: linear-gradient(270deg, transparent, rgba(245,240,232,0.2)); }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+    border: 1px solid rgba(245,240,232,0.06);
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.6;
+  }
+
+  .feature-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.85);
+    margin-bottom: 0.3rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo"><span>エンジ</span>×レンジ</a>
+  <div class="nav-links">
+    <a href="#tools">ツール紹介</a>
+    <a href="#flow">使い方</a>
+    <button onclick="openLink('enji')" class="nav-links-btn nav-cta">診断を受ける →</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-noise"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">WASEDA STUDENT OFFICIAL TOOLS 2025</div>
+
+    <h1 class="hero-title">
+      <span class="enji-word">エンジ</span><span class="hero-x">×</span>レンジ
+    </h1>
+
+    <p class="hero-sub">勝手に早稲田診断 &amp; AFTER FIVE YEAR</p>
+
+    <p class="hero-desc">
+      早稲田の現役生が開発した、現役生のための2大ツール。<br>
+      自分の「早稲田との相性」を知り、5年後の自分を探しに行こう。
+    </p>
+
+    <div class="hero-ctas">
+      <button onclick="openLink('enji')" class="btn-primary">
+        🎯 エンジ測定を受ける <span class="link-arrow">→</span>
+      </button>
+      <button onclick="openLink('aft')" class="btn-secondary">
+        👤 OGOB図鑑を見る <span class="link-arrow">→</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TOOLS SECTION -->
+<section class="tools-section" id="tools">
+  <div class="section-label reveal">OFFICIAL TOOLS</div>
+  <h2 class="section-heading reveal">早稲田現役生のための、<br>2つのツール。</h2>
+
+  <div class="tool-cards">
+
+    <!-- ENJI CARD -->
+    <article class="tool-card card-enji reveal">
+      <div class="tool-card-inner">
+        <div class="tool-card-header">
+          <div class="deco-number">01</div>
+          <div class="tool-tag">PERSONALITY DIAGNOSIS</div>
+          <h3 class="tool-card-title"><em>エンジ</em>×レンジ</h3>
+          <p class="tool-card-subtitle">勝手に早稲田診断</p>
+        </div>
+
+        <div class="tool-visual">
+          <p class="tool-desc">
+            早稲田の5万人を勝手に7系統に分類。<br>
+            5つの質問と「挑戦宣言」があなたのエンジ率と系統を決定する。
+            自分が早稲田にどれだけフィットしているか、測ってみよう。
+          </p>
+
+          <ul class="tool-features">
+            <li>5問の質問 + 挑戦宣言でエンジ率を算出</li>
+            <li>早稲田の7系統のうち、あなたの系統を判定</li>
+            <li>大隈重信はじめ早稲田ゆかりの偉人からのメッセージ</li>
+            <li>全ユーザーのビッグデータをリアルタイムで可視化</li>
+          </ul>
+
+          <div class="feature-grid">
+            <div class="feature-item">
+              <strong>🧬 系統診断</strong>
+              7系統から判定
+            </div>
+            <div class="feature-item">
+              <strong>📊 ビッグデータ</strong>
+              全員の測定結果
+            </div>
+            <div class="feature-item">
+              <strong>🎴 シェアカード</strong>
+              SNSで共有可能
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card-footer">
+          <button onclick="openLink('enji')" class="tool-link">
+            エンジ測定を受ける <span class="link-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- AFT CARD -->
+    <article class="tool-card card-aft reveal">
+      <div class="tool-card-inner">
+        <div class="tool-card-header">
+          <div class="deco-number">02</div>
+          <div class="tool-tag">OGOB NETWORKING</div>
+          <h3 class="tool-card-title">AFTER<br><em>FIVE YEAR</em></h3>
+          <p class="tool-card-subtitle">OGOB図鑑</p>
+        </div>
+
+        <div class="tool-visual">
+          <p class="tool-desc">
+            5年後の自分に出会う図鑑。<br>
+            各界で活躍する早稲田OG・OBのリアルな軌跡を知り、
+            OGOB訪問で直接キャリアの話を聞きに行こう。
+          </p>
+
+          <ul class="tool-features">
+            <li>早稲田の全学部から各職種のOG・OBを掲載</li>
+            <li>大学時代の写真・ビジョン・現役生へのメッセージ</li>
+            <li>気になる先輩にOGOB訪問を直接リクエスト</li>
+            <li>先輩主催のリアルイベントに参加可能</li>
+          </ul>
+
+          <div class="feature-grid">
+            <div class="feature-item">
+              <strong>📖 OGOB図鑑</strong>
+              全学部から掲載
+            </div>
+            <div class="feature-item">
+              <strong>🤝 訪問リクエスト</strong>
+              直接依頼できる
+            </div>
+            <div class="feature-item">
+              <strong>🎫 イベント</strong>
+              先輩と直接会える
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card-footer">
+          <button onclick="openLink('aft')" class="tool-link">
+            OGOB図鑑を見る <span class="link-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="tagline-sep">自分を知り、先輩を知り、早稲田を生き切れ。</div>
+
+<!-- FLOW SECTION -->
+<section class="flow-section" id="flow">
+  <div class="flow-inner">
+    <div class="flow-heading-wrap">
+      <div class="section-label reveal" style="text-align:center">HOW TO USE</div>
+      <h2 class="section-heading reveal" style="text-align:center">2ツールの使い方</h2>
+    </div>
+
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="flow-step-num">01</div>
+        <div class="flow-step-body">
+          <h3 class="flow-step-title">まず「エンジ率」を測る</h3>
+          <p class="flow-step-desc">
+            5問の質問と挑戦宣言に答えるだけ。あなたの早稲田との相性＝エンジ率と、
+            あなたが属する「系統」が判定される。所要時間は約3分。
+            診断結果はSNSでシェアしよう。
+          </p>
+          <div class="flow-step-tool">🎯 エンジ×レンジ</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-step-num">02</div>
+        <div class="flow-step-body">
+          <h3 class="flow-step-title">系統を踏まえて「5年後」を探す</h3>
+          <p class="flow-step-desc">
+            自分の系統と近い先輩、同じ学部の先輩をAFTER FIVE YEARで検索。
+            先輩のビジョンやメッセージを読んで、自分が歩みたい道を見つけよう。
+            学部・職種で絞り込みもできる。
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-step-num">03</div>
+        <div class="flow-step-body">
+          <h3 class="flow-step-title">気になった先輩にOGOB訪問を依頼する</h3>
+          <p class="flow-step-desc">
+            AFTER FIVE YEARから直接OGOB訪問をリクエスト。
+            リアルイベントへの参加も可能。
+            あなたの早稲田生活を照らす先輩との出会いが待っている。
+          </p>
+          <div class="flow-step-tool">👤 AFTER FIVE YEAR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-row">
+    <div class="stat-item reveal">
+      <div class="stat-num">7</div>
+      <div class="stat-label">早稲田の系統分類</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">14</div>
+      <div class="stat-label">対応学部数</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">2</div>
+      <div class="stat-label">早稲田現役生開発ツール</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-quote">「あなたの挑戦が、<br>あなたのエンジ率を決定する。」</p>
+    <p class="cta-sub">
+      早稲田の現役生として、自分を知ることから始めよう。<br>
+      診断は無料。3分で完結。
+    </p>
+    <div class="cta-buttons">
+      <button onclick="openLink('enji')" class="btn-primary">
+        エンジ×レンジ — 診断スタート <span class="link-arrow">→</span>
+      </button>
+      <button onclick="openLink('aft')" class="btn-secondary">
+        AFTER FIVE YEAR — 先輩を探す <span class="link-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>ENJI × RANGE &amp; AFTER FIVE YEAR — 早稲田現役生開発プロジェクト 2025</p>
+  <div class="footer-links">
+    <a onclick="openLink('enji')" href="#">エンジ×レンジ</a>
+    <a onclick="openLink('aft')" href="#">AFTER FIVE YEAR</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Intersection Observer for reveals
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+<div id="url-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#1e1e1e;border:1px solid rgba(245,240,232,0.15);padding:2.5rem;max-width:480px;width:90%;position:relative;">
+    <button onclick="document.getElementById('url-modal').style.display='none'" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(245,240,232,0.4);font-size:1.4rem;cursor:pointer;line-height:1;">×</button>
+    <p style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#C9A84C;margin-bottom:1rem;">OPEN LINK</p>
+    <p id="modal-title" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;margin-bottom:1.5rem;color:#F5F0E8;"></p>
+    <div style="display:flex;align-items:center;gap:0.8rem;background:#111;border:1px solid rgba(245,240,232,0.1);padding:0.8rem 1rem;">
+      <span id="modal-url" style="font-family:monospace;font-size:0.8rem;color:rgba(245,240,232,0.7);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+      <button id="copy-btn" onclick="copyURL()" style="flex-shrink:0;padding:0.4em 1em;background:#8C1A1A;border:none;color:#F5F0E8;font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.8rem;cursor:pointer;">コピー</button>
+    </div>
+    <p style="margin-top:1rem;font-size:0.75rem;color:rgba(245,240,232,0.35);line-height:1.6;">URLをコピーして、ブラウザのアドレスバーに貼り付けてください。<br>またはダウンロードしたHTMLファイルをブラウザで直接開くと、そのままボタンで遷移できます。</p>
+  </div>
+</div>
+
+<script>
+  function openLink(key) {
+    const urls = { enji: 'https://candid-sable-13bb11.netlify.app/', aft: 'https://dosgozi-beep.github.io/ogob-zukan/' };
+    const titles = { enji: 'エンジ×レンジ — 勝手に早稲田診断', aft: 'AFTER FIVE YEAR — OGOB図鑑' };
+    document.getElementById('modal-title').textContent = titles[key];
+    document.getElementById('modal-url').textContent = urls[key];
+    document.getElementById('copy-btn').textContent = 'コピー';
+    document.getElementById('url-modal').style.display = 'flex';
+  }
+  function copyURL() {
+    const url = document.getElementById('modal-url').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      document.getElementById('copy-btn').textContent = '✓ コピー済み';
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      document.getElementById('copy-btn').textContent = '✓ コピー済み';
+    });
+  }
+  document.getElementById('url-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+</script>
+</body>
+</html>
