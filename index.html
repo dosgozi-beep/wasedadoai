@@ -1189,37 +1189,11 @@
   revealEls.forEach(el => observer.observe(el));
 </script>
 
-<div id="url-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
-  <div style="background:#1e1e1e;border:1px solid rgba(245,240,232,0.15);padding:2.5rem;max-width:480px;width:90%;position:relative;">
-    <button onclick="document.getElementById('url-modal').style.display='none'" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(245,240,232,0.4);font-size:1.4rem;cursor:pointer;line-height:1;">×</button>
-    <p style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#C9A84C;margin-bottom:1rem;">OPEN LINK</p>
-    <p id="modal-title" style="font-family:'Shippori Mincho B1',serif;font-size:1.3rem;margin-bottom:1.5rem;color:#F5F0E8;"></p>
-    <div style="display:flex;align-items:center;gap:0.8rem;background:#111;border:1px solid rgba(245,240,232,0.1);padding:0.8rem 1rem;">
-      <span id="modal-url" style="font-family:monospace;font-size:0.8rem;color:rgba(245,240,232,0.7);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
-      <button id="copy-btn" onclick="copyURL()" style="flex-shrink:0;padding:0.4em 1em;background:#8C1A1A;border:none;color:#F5F0E8;font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.8rem;cursor:pointer;">コピー</button>
-    </div>
-    <p style="margin-top:1rem;font-size:0.75rem;color:rgba(245,240,232,0.35);line-height:1.6;">URLをコピーして、ブラウザのアドレスバーに貼り付けてください。<br>またはダウンロードしたHTMLファイルをブラウザで直接開くと、そのままボタンで遷移できます。</p>
-  </div>
-</div>
-
 <script>
   function openLink(key) {
     const urls = { enji: 'https://candid-sable-13bb11.netlify.app/', aft: 'https://dosgozi-beep.github.io/ogob-zukan/' };
     window.open(urls[key], '_blank');
   }
-  function copyURL() {
-    const url = document.getElementById('modal-url').textContent;
-    navigator.clipboard.writeText(url).then(() => {
-      document.getElementById('copy-btn').textContent = '✓ コピー済み';
-    }).catch(() => {
-      const ta = document.createElement('textarea');
-      ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-      document.getElementById('copy-btn').textContent = '✓ コピー済み';
-    });
-  }
-  document.getElementById('url-modal').addEventListener('click', function(e) {
-    if (e.target === this) this.style.display = 'none';
-  });
 </script>
 </body>
 </html>
