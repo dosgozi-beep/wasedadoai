@@ -98,32 +98,73 @@
 
   .hero-title {
     font-family: 'Shippori Mincho B1', serif;
-    font-size: clamp(3.5rem, 10vw, 7rem);
     font-weight: 800;
-    line-height: 1;
+    line-height: 1.05;
     letter-spacing: -0.02em;
     animation: fadeInUp 0.8s 0.15s ease both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1em;
   }
 
-  .hero-title .enji-word {
-    color: var(--enji-light);
-    display: inline-block;
+  .hero-title-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(3.8rem, 14vw, 7rem);
+    white-space: nowrap;
+  }
+
+  .hero-title-bottom {
+    font-size: clamp(3.8rem, 14vw, 7rem);
+    white-space: nowrap;
     position: relative;
+    display: inline-block;
   }
 
-  .hero-title .enji-word::after {
+  .hero-title-bottom::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--enji-bright), var(--gold));
   }
 
+  .hero-title .enji-word {
+    color: var(--enji-light);
+    display: inline-block;
+  }
+
   .hero-x {
     color: var(--gold);
-    margin: 0 0.15em;
+    margin: 0 0.1em;
+    font-size: 0.85em;
+  }
+
+  @media (min-width: 520px) {
+    .hero-title {
+      flex-direction: row;
+      align-items: baseline;
+    }
+    .hero-title-bottom::after { display: none; }
+    .hero-title .enji-word {
+      position: relative;
+    }
+    .hero-title .enji-word::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--enji-bright), var(--gold));
+    }
+    .hero-title-top, .hero-title-bottom {
+      font-size: clamp(3.5rem, 10vw, 7rem);
+    }
   }
 
   .hero-sub {
@@ -170,8 +211,8 @@
     align-items: center;
     justify-content: center;
     gap: 0.7em;
-    width: 240px;
-    padding: 1.05em 1.5em;
+    min-width: 220px;
+    padding: 1.05em 2em;
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-weight: 700;
     font-size: 0.92rem;
@@ -896,7 +937,7 @@
     <div class="hero-badge">WASEDA STUDENT OFFICIAL TOOLS 2025</div>
 
     <h1 class="hero-title">
-      <span class="enji-word">エンジ</span><span class="hero-x">×</span>レンジ
+      <span class="hero-title-top"><span class="enji-word">エンジ</span><span class="hero-x">×</span></span><span class="hero-title-bottom">レンジ</span>
     </h1>
 
     <p class="hero-sub">勝手に早稲田診断 &amp; AFTER FIVE YEAR</p>
@@ -1164,11 +1205,7 @@
 <script>
   function openLink(key) {
     const urls = { enji: 'https://candid-sable-13bb11.netlify.app/', aft: 'https://dosgozi-beep.github.io/ogob-zukan/' };
-    const titles = { enji: 'エンジ×レンジ — 勝手に早稲田診断', aft: 'AFTER FIVE YEAR — OGOB図鑑' };
-    document.getElementById('modal-title').textContent = titles[key];
-    document.getElementById('modal-url').textContent = urls[key];
-    document.getElementById('copy-btn').textContent = 'コピー';
-    document.getElementById('url-modal').style.display = 'flex';
+    window.open(urls[key], '_blank');
   }
   function copyURL() {
     const url = document.getElementById('modal-url').textContent;
